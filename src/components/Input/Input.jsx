@@ -1,12 +1,12 @@
 import { useState } from "react";
 import styles from "./Input.module.scss";
 
-export default function Input({ onChangeCb, placeholder = "Search note..." }) {
-  const [value, setValue] = useState("");
-
-  const onChange = (e) => setValue(e.target.value);
-
-  console.log(value);
+export default function Input({
+  placeholder = "Search note...",
+  value,
+  onChange,
+  onKyeDown,
+}) {
   return (
     <input
       type="text"
@@ -14,6 +14,7 @@ export default function Input({ onChangeCb, placeholder = "Search note..." }) {
       onChange={onChange}
       className={styles.input}
       placeholder={placeholder}
+      onKeyDown={onKyeDown}
     />
   );
 }

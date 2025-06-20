@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./App.module.scss";
 import Button from "./components/Button/Button";
 import Dropdown from "./components/Dropdown/Dropdown";
@@ -11,32 +11,57 @@ import ToDoList from "./components/ToDoList/ToDoList";
 export default function App() {
   const [active, setActive] = useState(false);
   const [tasks, setTasks] = useState([]);
-
-  function getActive() {
-    setActive(!active);
-  }
-
-  function addTask(text) {
-    setTasks([...tasks, { id: Date.now(), text }]);
-  }
-
   const [dropdown, setDropDown] = useState(false);
+  const [searchInputValue, setSearchInputValue] = useState("");
+  const [filter, setFilter] = useState("ALL");
 
-  function getDropDown() {
-    setDropDown(!dropdown);
-  }
+  console.log(searchInputValue);
+
+  const getActive = () => setActive((prev) => !prev);
+
+  const addTask = (text) =>
+    setTasks([...tasks, { id: Date.now(), text: text, completed: false }]);
+
+  const openDropDown = () => setDropDown((prev) => !prev);
+
+  const searchTask = tasks.filter((task) =>
+    task.text.toLowerCase().includes(searchInputValue.toLowerCase())
+  );
+
+  const filteredTask = tasks.filter((task) => {
+    if (filter === "Complete") {
+      return task.completed;
+    }
+    if (filter === "Incomplete") {
+      return !task.completed;
+    }
+
+    return true;
+  });
+
+  console.log("Массив:", searchTask);
 
   return (
     <LayOut>
       <main>
         <h1 className={styles.title}>TODO LIST</h1>
         <div className={styles.content}>
-          <Input />
-          <Dropdown onClick={getDropDown} />
+          <Input
+            value={searchInputValue}
+            onChange={(e) => setSearchInputValue(e.target.value)}
+          />
+          <Dropdown
+            onClick={openDropDown}
+            currFilter={filter}
+            setFilter={setFilter}
+          />
           <ThemeToggle />
         </div>
-        <ToDoList task={tasks} />
-        <OverLay isActive={active} onClose={getActive} onClick={addTask} />
+        <ToDoList
+          tasks={searchTask}
+          changeList={(newArray) => setTasks(newArray)}
+        />
+        <OverLay isActive={active} onClose={getActive} onAddTask={addTask} />
         <Button className={styles.btn} onClick={getActive}>
           <svg
             width="24"

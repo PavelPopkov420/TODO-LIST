@@ -1,16 +1,31 @@
+import { useState } from "react";
 import Button from "../Button/Button";
 import styles from "./ToDoItem.module.scss";
 
-export default function ToDoItem({ text, isCompleted, onDelete }) {
+export default function ToDoItem({ text, onDelete, id }) {
+  const [checked, setChecked] = useState(false);
+
+  const handleClick = () => {
+    setChecked((prev) => !prev);
+  };
+
   return (
     <div className={styles.checkbox}>
       <input
         type="checkbox"
         className={styles.checkbox__input}
-        checked={isCompleted}
+        checked={checked}
+        onClick={handleClick}
       />
-      <label className={styles.checkbox__content}>{text}</label>
-      <Button className={styles.checkbox__btn} onClick={onDelete}>
+
+      <label
+        className={`${styles.checkbox__content} ${
+          checked ? styles.checked : ""
+        }`}
+      >
+        {text}
+      </label>
+      <Button className={styles.checkbox__btn} onClick={() => onDelete(id)}>
         <svg
           width="18"
           height="18"

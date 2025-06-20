@@ -1,18 +1,23 @@
 import { useState } from "react";
 import styles from "./Dropdown.module.scss";
+import DropDownItem from "../DropDownItem/DropDownItem";
 
-export default function Dropdown() {
+export default function Dropdown({ onClick, currFilter, setFilter }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const [contentType, setContentType] = useState("ALL");
+  const [contentType, setContentType] = useState("All");
 
   function handleClick(type) {
     setContentType(type);
+    setIsOpen((prev) => !prev);
   }
 
   return (
-    <div className={styles.list}>
-      <div className={styles.list__filter} onClick={() => setIsOpen(!isOpen)}>
+    <div className={styles.list} onClick={onClick}>
+      <div
+        className={styles.list__filter}
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
         {contentType}
         {isOpen ? (
           <svg
@@ -46,41 +51,37 @@ export default function Dropdown() {
             <path
               d="M4.63077 1L8 4"
               stroke="#F7F7F7"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M1.26154 4L4.63077 1"
               stroke="#F7F7F7"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         )}
       </div>
-      <ul className={`${styles.list__dropdown} ${isOpen ? styles.active : ""}`}>
-        <li
-          className={styles.list__item}
-          isActive={contentType === "ALL"}
-          onClick={() => handleClick("ALL")}
-        >
-          All
-        </li>
-        <li
-          className={styles.list__item}
-          isActive={contentType === "Complete"}
-          onClick={() => handleClick("Complete")}
-        >
-          Complete
-        </li>
-        <li
-          className={styles.list__item}
-          isActive={contentType === "Incomplete"}
-          onClick={() => handleClick("Incomplete")}
-        >
-          Incomplete
-        </li>
-      </ul>
+      {isOpen ? (
+        <ul className={`${styles.list__dropdown} ${styles.active}`}>
+          <DropDownItem
+            contentType={"All"}
+            isActive={contentType === "All"}
+            onClick={() => handleClick("All")}
+          />
+          <DropDownItem
+            contentType={"Complete"}
+            isActive={contentType === "Complete"}
+            onClick={() => handleClick("Complete")}
+          />
+          <DropDownItem
+            contentType={"Incomplete"}
+            isActive={contentType === "Incomplete"}
+            onClick={() => handleClick("Incomplete")}
+          />
+        </ul>
+      ) : null}
     </div>
   );
 }

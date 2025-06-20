@@ -1,6 +1,7 @@
 .list {
   position: relative;
   display: block;
+
   &__filter {
     min-width: 85px;
     width: 100%;
@@ -37,35 +38,12 @@
     width: 93px;
     height: 84px;
     background-color: #fff;
-  }
-  &__item {
-    padding-left: 6px;
-    height: 18px;
-    list-style-type: none;
-    font-family: Kanit;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    text-transform: capitalize;
-    color: var(--color-purple);
-    &:hover {
-      background-color: #6c63ff33;
-    }
-
-    &--active {
+    &.active {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      margin-left: 6px;
-      gap: 6px;
+      gap: 8px;
+      padding: 8px 0;
+      height: auto;
     }
   }
-}
-
-.list__dropdown.active {
-  display: flex;
-  gap: 8px;
-  padding-top: 8px;
-  flex-direction: column;
 }

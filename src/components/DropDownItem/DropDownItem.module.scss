@@ -1,0 +1,26 @@
+.list {
+  &__item {
+    padding-left: 6px;
+    height: 18px;
+    list-style-type: none;
+    font-family: Kanit;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-transform: capitalize;
+    color: var(--color-purple);
+
+    &:hover {
+      background-color: #6c63ff33;
+    }
+
+    &--active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 6px;
+      gap: 6px;
+    }
+  }
+}

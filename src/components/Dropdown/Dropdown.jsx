@@ -5,10 +5,8 @@ import DropDownItem from "../DropDownItem/DropDownItem";
 export default function Dropdown({ onClick, currFilter, setFilter }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const [contentType, setContentType] = useState("All");
-
   function handleClick(type) {
-    setContentType(type);
+    setFilter(type);
     setIsOpen((prev) => !prev);
   }
 
@@ -18,7 +16,7 @@ export default function Dropdown({ onClick, currFilter, setFilter }) {
         className={styles.list__filter}
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        {contentType}
+        {currFilter}
         {isOpen ? (
           <svg
             width="9"
@@ -67,17 +65,17 @@ export default function Dropdown({ onClick, currFilter, setFilter }) {
         <ul className={`${styles.list__dropdown} ${styles.active}`}>
           <DropDownItem
             contentType={"All"}
-            isActive={contentType === "All"}
+            isActive={currFilter === "All"}
             onClick={() => handleClick("All")}
           />
           <DropDownItem
             contentType={"Complete"}
-            isActive={contentType === "Complete"}
+            isActive={currFilter === "Complete"}
             onClick={() => handleClick("Complete")}
           />
           <DropDownItem
             contentType={"Incomplete"}
-            isActive={contentType === "Incomplete"}
+            isActive={currFilter === "Incomplete"}
             onClick={() => handleClick("Incomplete")}
           />
         </ul>

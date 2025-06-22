@@ -13,9 +13,9 @@ export default function App() {
   const [tasks, setTasks] = useState([]);
   const [dropdown, setDropDown] = useState(false);
   const [searchInputValue, setSearchInputValue] = useState("");
-  const [filter, setFilter] = useState("ALL");
+  const [filter, setFilter] = useState("All");
 
-  console.log(searchInputValue);
+  // console.log(searchInputValue);
 
   const getActive = () => setActive((prev) => !prev);
 
@@ -28,7 +28,7 @@ export default function App() {
     task.text.toLowerCase().includes(searchInputValue.toLowerCase())
   );
 
-  const filteredTask = tasks.filter((task) => {
+  const filteredTask = searchTask.filter((task) => {
     if (filter === "Complete") {
       return task.completed;
     }
@@ -39,7 +39,7 @@ export default function App() {
     return true;
   });
 
-  console.log("Массив:", searchTask);
+  console.log(filteredTask);
 
   return (
     <LayOut>
@@ -58,7 +58,7 @@ export default function App() {
           <ThemeToggle />
         </div>
         <ToDoList
-          tasks={searchTask}
+          tasks={filteredTask}
           changeList={(newArray) => setTasks(newArray)}
         />
         <OverLay isActive={active} onClose={getActive} onAddTask={addTask} />

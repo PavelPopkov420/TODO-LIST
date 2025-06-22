@@ -2,11 +2,12 @@ import { useState } from "react";
 import Button from "../Button/Button";
 import styles from "./ToDoItem.module.scss";
 
-export default function ToDoItem({ text, onDelete, id }) {
+export default function ToDoItem({ text, onDelete, id, onClick }) {
   const [checked, setChecked] = useState(false);
 
   const handleClick = () => {
     setChecked((prev) => !prev);
+    onClick(id, checked);
   };
 
   return (
@@ -17,7 +18,6 @@ export default function ToDoItem({ text, onDelete, id }) {
         checked={checked}
         onClick={handleClick}
       />
-
       <label
         className={`${styles.checkbox__content} ${
           checked ? styles.checked : ""

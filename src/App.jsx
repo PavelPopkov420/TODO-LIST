@@ -30,10 +30,10 @@ export default function App() {
 
   const filteredTask = searchTask.filter((task) => {
     if (filter === "Complete") {
-      return task.completed;
+      return task.completed === true;
     }
     if (filter === "Incomplete") {
-      return !task.completed;
+      return task.completed === false;
     }
 
     return true;

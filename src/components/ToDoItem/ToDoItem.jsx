@@ -2,8 +2,8 @@ import { useState } from "react";
 import Button from "../Button/Button";
 import styles from "./ToDoItem.module.scss";
 
-export default function ToDoItem({ text, onDelete, id, onClick }) {
-  const [checked, setChecked] = useState(false);
+export default function ToDoItem({ text, onDelete, id, onClick, isChecked }) {
+  const [checked, setChecked] = useState(isChecked);
 
   const handleClick = () => {
     setChecked((prev) => !prev);

@@ -12,7 +12,7 @@ export default function ToDoList({ tasks, changeList, onChange }) {
   const currentChangeItem = (id) => {
     const newArr = tasks.map((task) => {
       if (task.id === id) {
-        task.completed = !task.completed;
+        return { ...task, completed: !task.completed };
       }
       return task;
     });
@@ -28,8 +28,8 @@ export default function ToDoList({ tasks, changeList, onChange }) {
             id={item.id}
             text={item.text}
             onDelete={deleteTask}
-            isComplete={false}
             onClick={currentChangeItem}
+            isChecked={item.completed}
           />
         ))}
         {tasks?.length === 0 && <Empty />}

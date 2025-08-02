@@ -4,7 +4,7 @@ import Button from "./components/Button/Button";
 import Dropdown from "./components/Dropdown/Dropdown";
 import Input from "./components/Input/Input";
 import LayOut from "./components/LayOut/LayOut";
-import OverLay from "./components/Overlay/OverLay";
+import OverLay from "./components/OverLay/OverLay";
 import ThemeToggle from "./components/ThemeToggle/ThemeToggle";
 import ToDoList from "./components/ToDoList/ToDoList";
 

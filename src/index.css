@@ -365,12 +365,7 @@ template {
 }
 
 :root {
-}
-@mixin h1-styles {
-  font-family: "Space Grotesk", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-  font-size: 60px;
-  line-height: 100%;
-  letter-spacing: 0%;
+  --color-purple: #6c63ff;
+  --color-white: #ffff;
+  --color-black: #252525;
 }
